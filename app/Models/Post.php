@@ -12,7 +12,7 @@ class Post extends Model
         'title',
         'text',
     ];
-    protected $primaryKey = 'post_id';
+    protected $primaryKey = 'id';
 
 
     public function user()
