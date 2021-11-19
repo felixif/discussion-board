@@ -12,6 +12,8 @@ class Post extends Model
         'title',
         'text',
     ];
+    protected $primaryKey = 'post_id';
+
 
     public function user()
     {
