@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,5 +42,22 @@ Route::get('/users/{id}/edit', [UserController::class, 'edit'])
 
 Route::put('/users/{id}', [UserController::class, 'update'])
     ->name('users.update');
+
+
+/**
+ * Routes for the post model
+ */
+
+Route::get('/posts', [PostController::class, 'index'])
+    ->name('posts.index');
+
+Route::get('/posts/create', [PostController::class, 'create'])
+    ->name('posts.create');
+
+Route::post('/posts', [PostController::class, 'store'])
+    ->name('posts.store');
+
+Route::get('/posts/{id}', [PostController::class, 'show'])
+    ->name('posts.show');
 
 require __DIR__.'/auth.php';
