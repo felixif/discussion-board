@@ -26,8 +26,20 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/users', [UserController::class, 'index']);
+/**
+ * Routes for the user model
+ */
+
+Route::get('/users', [UserController::class, 'index'])
+    ->name('users.index');
+
 Route::get('/users/{id}', [UserController::class, 'show'])
     ->name('users.show');
+
+Route::get('/users/{id}/edit', [UserController::class, 'edit'])
+    ->name('users.edit');
+
+Route::put('/users/{id}', [UserController::class, 'update'])
+    ->name('users.update');
 
 require __DIR__.'/auth.php';

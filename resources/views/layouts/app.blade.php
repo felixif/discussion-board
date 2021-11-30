@@ -4,11 +4,11 @@
         <meta charset="UTF-8">
         <meta name ="viewpoint" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Discussion Blard - @yield('title')</title>
+        <title>Discussion Board - @yield('title')</title>
     </head>
     
     <body>
-        <h1>Discussion Blard - @yield('title')</h1>
+        <h1>Discussion Board - @yield('title')</h1>
 
         <div>
             @yield('content')

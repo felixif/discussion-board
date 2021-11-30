@@ -59,7 +59,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('users.edit', ['user' => $user]);
     }
 
     /**
@@ -71,7 +72,15 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $user->name = $request->get('name');
+    
+        $user->email = $request->get('email');
+    
+        $user->save();
+    
+        return redirect()->route('users.edit', [$user->id])->with('message', 'User has been updated!');
     }
 
     /**
