@@ -10,6 +10,7 @@
         <p>Title: <input type="text" name="title"></p>
         <p>Contents:</p>
         <textarea name="text"></textarea>
+        <p>Author: <input type="text" name="user_id" disabled value="{{ Auth::user()->id }}"></p>
         <button type="submit">Post</button>
     </form>
 
