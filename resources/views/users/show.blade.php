@@ -8,9 +8,10 @@
     <p>{{$user->name}}'s profile</p> 
 
     @if ($user->id === Auth::user()->id)
-        <a href="{{ route('users.edit', ['user' => $user ]) }}" class="btn btn-dark">Edit profile</a>  
+        <a href="{{ route('users.edit', ['user' => $user ]) }}" class="btn btn-dark">Edit profile</a>
     @endif
     
+    {{-- Add delete button for admin --}}
 
     <br>
     <br>

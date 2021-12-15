@@ -75,20 +75,17 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        $user = User::findOrFail($id);
-
         $user->name = $request->get('name');
-    
         $user->email = $request->get('email');
-    
         $user->save();
     
-        return redirect()->route('users.edit', [$user->id])->with('message', 'User has been updated!');
+        // session()->flash('message', 'User data has been updated!');
+        return redirect()->route('users.edit', $user)->with('message', 'User has been updated!');
     }
 
     /**
@@ -97,9 +94,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        // session()->flash('message', 'User has been deleted!');
+        return redirect()->route('users.index')->with('message', 'User has been deleted!');
     }
 
 }

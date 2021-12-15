@@ -6,7 +6,7 @@
 
 @section('content')
   @if ($user->id === Auth::user()->id)
-    <p>Edit your profile</p>
+    <h1>Edit your profile</h1>
 
     <form method="POST" action="{{ route('users.update', $user->id) }}">
         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -29,6 +29,7 @@
             class="form-control"
           />
         </div>
+        <br />
         <button type="submit" class="btn btn-primary">
           <i class="fa fa-btn fa-sign-in"></i>Update
         </button>
