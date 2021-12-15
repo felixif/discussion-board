@@ -12,10 +12,11 @@
             <h2 style="text-align:center">Please login or register to access the content</h2>
         @endif
     @else 
-        <p>Welcome {{ Auth::user()->name }}</p>
-
-        <button href="{{ route('posts.create') }}">Create new post</button>
+        <p>Welcome {{ Auth::user()->name }}</p><br />
         
-        <p>Your posts</p>
+        <a href="{{ route('posts.create') }}" class="btn btn-dark">Create a new post</a>
+        <a href="{{ route('dashboard') }}" class="btn btn-dark">Go to dashboard</a>
+        
+
     @endguest
 @endsection

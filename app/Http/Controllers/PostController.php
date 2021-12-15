@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -46,7 +47,11 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = $request->user();
+        $formData = $request->all();
+        $post = $user->posts()->create($formData);
+
+        return redirect()->route('posts.show', ['id' => $post->id]);
     }
 
     /**

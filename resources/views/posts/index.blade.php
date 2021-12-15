@@ -5,9 +5,9 @@
 @endsection
 
 @section('content')
-    <p>All the posts on the discussion board</p>
+    <h2>All the posts on the discussion board</h2>
 
-    <button href="{{ route('posts.create') }}">Create new post</button>
+    <a href="{{ route('posts.create') }}" class="btn btn-dark">Create new post</a>
     
     @foreach ($posts as $post)
             <h2><a href="{{ route('posts.show', ['id' => $post->id ]) }}"> {{$post->title}}</a> 

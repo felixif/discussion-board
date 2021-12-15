@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+  @if ($user->id === Auth::user()->id)
     <p>Edit your profile</p>
 
     <form method="POST" action="{{ route('users.update', $user->id) }}">
@@ -32,5 +33,8 @@
           <i class="fa fa-btn fa-sign-in"></i>Update
         </button>
       </form>
+  @else
+      <h1>You really should not be here!</h1>
+  @endif
     
 @endsection

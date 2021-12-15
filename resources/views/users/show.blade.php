@@ -5,10 +5,17 @@
 @endsection
 
 @section('content')
-    <p>{{$user->name}}'s profile</p> <a href="{{ route('users.edit', ['id' => $user->id ]) }}">[edit]</a>
-    <ul style="list-style: none">
-       <li>Name: {{$user->name}}</li>
-       <li>Email: {{$user->email}}</li>
-    </ul>
+    <p>{{$user->name}}'s profile</p> 
+
+    @if ($user->id === Auth::user()->id)
+        <a href="{{ route('users.edit', ['id' => $user->id ]) }}" class="btn btn-dark">Edit profile</a>  
+    @endif
+    
+
+    <br>
+    <br>
+
+    <p>Name: {{$user->name}}</p>
+    <p>Email: {{$user->email}}</p>
     
 @endsection
