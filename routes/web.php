@@ -34,10 +34,10 @@ Route::get('/dashboard', function () {
 Route::get('/users', [UserController::class, 'index'])
     ->name('users.index');
 
-Route::get('/users/{id}', [UserController::class, 'show'])
+Route::get('/users/{user}', [UserController::class, 'show'])
     ->name('users.show');
 
-Route::get('/users/{id}/edit', [UserController::class, 'edit'])
+Route::get('/users/{user}/edit', [UserController::class, 'edit'])
     ->name('users.edit');
 
 Route::put('/users/{id}', [UserController::class, 'update'])
@@ -57,7 +57,7 @@ Route::get('/posts/create', [PostController::class, 'create'])
 Route::post('/posts', [PostController::class, 'store'])
     ->name('posts.store');
 
-Route::get('/posts/{id}', [PostController::class, 'show'])
+Route::get('/posts/{post}', [PostController::class, 'show'])
     ->name('posts.show');
 
 require __DIR__.'/auth.php';

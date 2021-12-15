@@ -8,7 +8,7 @@
     <p>{{$user->name}}'s profile</p> 
 
     @if ($user->id === Auth::user()->id)
-        <a href="{{ route('users.edit', ['id' => $user->id ]) }}" class="btn btn-dark">Edit profile</a>  
+        <a href="{{ route('users.edit', ['user' => $user ]) }}" class="btn btn-dark">Edit profile</a>  
     @endif
     
 
