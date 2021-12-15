@@ -7,6 +7,16 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+
+    /**
+     * Allows the guest to see only the list of users
+     * so no email is going to be leaked
+     */
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+    }
+
     /**
      * Display a listing of the resource.
      *

@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+
+    /**
+     * Allows the guest to only see the lists of posts and the
+     * posts in detail
+     */
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index', 'show');
+    }
+
     /**
      * Display a listing of the resource.
      *
