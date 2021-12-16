@@ -37,6 +37,7 @@ class CommentController extends Controller
         return view('comments.create', ['post' => $post]);
     }
 
+
     /**
      * Store a newly created resource in storage.
      *
@@ -51,6 +52,16 @@ class CommentController extends Controller
         $post->comments()->save($comment);
 
         return redirect()->route('posts.show', ['post' => $post]);
+    }
+
+    public function apiStore(Request $request)
+    {
+        $c = new Comment();
+        $c->text = $request['text'];
+        $c->user_id = $request['user_id'];
+        $c->post_id = $request['post_id'];
+        $c->save();
+        return $c;
     }
 
     /**

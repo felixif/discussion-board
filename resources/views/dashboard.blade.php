@@ -32,7 +32,11 @@
                                         <a class="dropdown-item" href="{{ route('posts.show', $post) }}">View</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="{{ route('posts.edit', $post) }}">Edit</a>
-                                        <a class="dropdown-item" href="{{ route('posts.destroy', $post) }}">Delete</a>
+                                        <form method ="POST" action="{{ route('posts.destroy', $post) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type=submit class="dropdown-item">Delete</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

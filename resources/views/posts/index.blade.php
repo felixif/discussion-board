@@ -33,8 +33,9 @@
                                     <form method ="POST" action="{{ route('posts.destroy', $post) }}">
                                         @csrf
                                         @method('DELETE')
-                                        <a class="dropdown-item" href="{{ route('posts.destroy', $post) }}">Delete</a>
+                                        <button type=submit class="dropdown-item">Delete</button>
                                     </form>
+                                    
                                 @endif
                             </div>
                         </div>
@@ -44,5 +45,4 @@
             @endforeach
         </div>
     </div>
-    
 @endsection
