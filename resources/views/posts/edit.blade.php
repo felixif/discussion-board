@@ -5,25 +5,35 @@
 @endsection
 
 @section('content')
-  @if ($post->user_id === Auth::user()->id)
-  <h1>Edit your post</h1>
+    @if ($post->user->id === Auth::user()->id)
+    <h1>Edit your profile</h1>
 
-  <form method="POST" action="{{ route('posts.update', $post) }}">
-        <label for="title">Title</label><br />
-        <input type="text" name="title"  value="{{$post->title}}"><br />
+    <form method="POST" action="{{ route('posts.update', $post) }}">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+        <input type="hidden" name="_method" value="PUT" />
+        
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text"
+                 name="title"  
+                 value="{{$post->title}}" 
+                 class="form-control">
+        </div>
 
-        <label for="text">Contents</label><br />
-        <textarea name="text">{{$post->text}}</textarea><br />
-
-        <input type="hidden" name="user_id" disabled value="{{ Auth::user()->id }}">
-
-        <label for="user_name">Author</label>
-        <input type="text" name="user_name" disabled value="{{ Auth::user()->name }}"></p>
-
-        <input class="btn btn-dark" type="submit" value="Submit">
-  </form>
-  @else
-      <h1>You really should not be here!</h1>
-  @endif
+        <div class="form-group">
+          <label for="text">Contents</label>
+          <textarea class="form-control" name="text">
+            {{$post->text}}
+          </textarea>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-dark">
+          <i class="fa fa-btn fa-sign-in"></i>Update
+        </button>
+      </form>
+@else
+  <h1>You really should not be here!</h1>
+@endif
+ 
     
 @endsection

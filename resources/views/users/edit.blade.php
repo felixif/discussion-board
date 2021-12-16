@@ -8,7 +8,7 @@
   @if ($user->id === Auth::user()->id)
     <h1>Edit your profile</h1>
 
-    <form method="POST" action="{{ route('users.update', $user->id) }}">
+    <form method="POST" action="{{ route('users.update', $user) }}">
         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
         <input type="hidden" name="_method" value="PUT" />
         <div class="form-group">
@@ -30,7 +30,7 @@
           />
         </div>
         <br />
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" class="btn btn-dark">
           <i class="fa fa-btn fa-sign-in"></i>Update
         </button>
       </form>

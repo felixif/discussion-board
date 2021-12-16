@@ -2,22 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
-class PostController extends Controller
+class CommentController extends Controller
 {
-
     /**
-     * Allows the guest to only see the lists of posts and the
-     * posts in detail
+     * Allows the guest to only see the lists of comments and the
+     * comments in detail
      */
     public function __construct()
     {
         $this->middleware('auth')->except('index', 'show');
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -25,8 +23,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
-        return view('posts.index', ['posts' => $posts]);
+        $comments = Comment::all();
+        return view('comments.index', ['comments' => $comments]);
     }
 
     /**
@@ -34,9 +32,9 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Post $post)
     {
-        return view('posts.create');
+        return view('comments.create', ['post' => $post]);
     }
 
     /**
@@ -45,11 +43,12 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Post $post)
     {
-        $user = $request->user();
-        $formData = $request->all();
-        $post = $user->posts()->create($formData);
+        $comment = new Comment;
+        $comment->text = $request->text;
+        $comment->user()->associate($request->user());
+        $post->comments()->save($comment);
 
         return redirect()->route('posts.show', ['post' => $post]);
     }
@@ -60,9 +59,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Comment $comment)
     {
-        return view('posts.show', ['post' => $post]);
+        return view('comments.show', ['comment' => $comment]);
     }
 
     /**
@@ -71,9 +70,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Comment $comment)
     {
-        return view('posts.edit', ['post' => $post]);
+        return view('comments.edit', ['comment' => $comment]);
     }
 
     /**
@@ -83,13 +82,12 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, Comment $comment)
     {
-        $post->title = $request->get('title');
-        $post->text = $request->get('text');
-        $post->save();
+        $comment->text = $request->get('text');
+        $comment->save();
 
-        return redirect()->route('posts.show', ['post' => $post])->with('message', 'The post has been updated!');
+        return redirect()->route('posts.show', $comment->post)->with('message', 'Comment has been updated!');
     }
 
     /**
@@ -98,9 +96,11 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Comment $comment)
     {
-        $post->delete();
-        return redirect()->route('posts.index')->with('message', 'The post has been deleted!');
+        $post = $comment->post;
+        $comment->delete();
+        return redirect()->route('posts.show', ['post' => $post])
+            ->with('message', 'The comment has been deleted!');
     }
 }
