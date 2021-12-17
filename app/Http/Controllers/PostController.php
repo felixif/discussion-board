@@ -50,7 +50,6 @@ class PostController extends Controller
         $this->validate($request, [
             'title' => 'required|min:3|max:50',
             'text' => 'required|min:3|max:1000',
-            'user_id' => 'required',
         ]);
 
         $user = $request->user();
@@ -94,7 +93,6 @@ class PostController extends Controller
         $this->validate($request, [
             'title' => 'required|min:3|max:50',
             'text' => 'required|min:3|max:1000',
-            'user_id' => 'required',
         ]);
 
         $post->title = $request->get('title');

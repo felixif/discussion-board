@@ -52,8 +52,6 @@ class CommentController extends Controller
     {
         $this->validate($request, [
             'text' => 'required|min:3|max:1000',
-            'user_id' => 'required',
-            'post_id' => 'required',
         ]);
 
         $comment = new Comment;
@@ -68,8 +66,6 @@ class CommentController extends Controller
     {
         $this->validate($request, [
             'text' => 'required|min:3|max:1000',
-            'user_id' => 'required',
-            'post_id' => 'required',
         ]);
 
         $c = new Comment();
@@ -77,12 +73,6 @@ class CommentController extends Controller
         $c->user_id = $request['user_id'];
         $c->post_id = $request['post_id'];
         $c->save();
-
-        $post = Post::findOrFail('post_id');
-        $owner = User::findOrFail($post->user_id);
-        if($c->user_id !== $owner) {
-            $c->post->user_id->notify(new Newcomment);
-        }
         return $c;
     }
 
@@ -118,7 +108,7 @@ class CommentController extends Controller
     public function update(Request $request, Comment $comment)
     {
         $this->validate($request, [
-            'comment' => 'required|min:3|max:1000',
+            'text' => 'required|min:3|max:1000',
         ]);
 
         $comment->text = $request->get('text');

@@ -15,7 +15,6 @@
                     <h5 class="card-title">Name: {{$user->name}}</h5>
                     <p class="card-text">Email: {{$user->email}}</p>
                     <p class="card-text">Role: {{$user->role_id}}</p>
-                    <p class="card-text">Phone: {{$user->phone}}</p>
                     <div class="dropdown show">
                         <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Options

@@ -21,14 +21,17 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item" href="{{ route('posts.show', $post) }}">View</a>
-                        @if(Auth::user()->id === $post->user->id)
+                        @if(Auth::user()->id === $post->user->id || Auth::user()->role_id === "adm" 
+                            || Auth::user()->role_id === "mod" )
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ route('posts.edit', $post) }}">Edit</a>
-                            <form method ="POST" action="{{ route('posts.destroy', $post) }}">
-                                @csrf
-                                @method('DELETE')
-                                <button type=submit class="dropdown-item">Delete</button>
-                            </form>  
+                            @if(Auth::user()->id === $post->user->id || Auth::user()->role_id === "adm")
+                                <form method ="POST" action="{{ route('posts.destroy', $post) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type=submit class="dropdown-item">Delete</button>
+                                </form> 
+                            @endif 
                         @endif
                     </div>
                 </div>
@@ -77,15 +80,18 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item" href="{{ route('comments.show', $comment) }}">View</a>
-                            @if(Auth::user()->id === $comment->user_id)
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ route('comments.edit', $comment) }}">Edit</a>
+                            @if(Auth::user()->id === $comment->user->id || Auth::user()->role_id === "adm" 
+                            || Auth::user()->role_id === "mod" )
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ route('comments.edit', $comment) }}">Edit</a>
+                            @if(Auth::user()->id === $comment->user->id || Auth::user()->role_id === "adm")
                                 <form method ="POST" action="{{ route('comments.destroy', $comment) }}">
                                     @csrf
                                     @method('DELETE')
                                     <button type=submit class="dropdown-item">Delete</button>
-                                </form>
-                            @endif
+                                </form> 
+                            @endif 
+                        @endif
                         </div>
                     </div>
                 </div>
