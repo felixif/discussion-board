@@ -6,7 +6,9 @@
 
 @section('content')
 
-  @if ($comment->user->id === Auth::user()->id)
+  @if ($comment->user->id === Auth::user()->id 
+        || Auth::user()->role_id === "adm"
+        || Auth::user()->role_id === "mod")
   <h1>Edit your comment</h1>
 
   <form method="POST" action="{{ route('comments.update', $comment) }}">

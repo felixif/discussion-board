@@ -6,22 +6,39 @@
 
 @section('content')
 
-    <form method="POST" action="{{ route('posts.store') }}">
-        @csrf
+    <div class="card">
+        <div class="card-header">New Post</div>
 
-        <label for="title">Title</label><br />
-        <input type="text" name="title"><br />
+            <div class="card-body">
+            
+                <form method="POST" action="{{ route('posts.store') }}">
+                    @csrf
+                    
+                    <div class="row mb-3">
+                        <label for="title">Title</label>
+                        <div class="col-mb-3">
+                            <input class="form-control" type="text" name="title">
+                        </div>
+                    </div>
 
-        <label for="text">Contents</label><br />
-        <textarea name="text"></textarea><br />
+                    <div class="row mb-3">
+                        <label for="text">Contents</label>
+                        <div class="col-mb-3">
+                            <textarea class="form-control" name="text" style="height: 100px"></textarea>
+                        </div>
+                    </div>
 
-        <input type="hidden" name="user_id" disabled value="{{ Auth::user()->id }}">
-
-        <label for="user_name">Author</label>
-        <input type="text" name="user_name" disabled value="{{ Auth::user()->name }}"></p>
-
-        <input class="btn btn-dark" type="submit" value="Submit">
-    </form>
+                    <div class="row mb-3">
+                        <div class="col-mb-3">
+                            <button type="submit" class="btn btn-dark">
+                                Post
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     
 @endsection

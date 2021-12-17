@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except('index');
+        $this->middleware('auth');
     }
 
     /**
@@ -82,6 +82,7 @@ class UserController extends Controller
     {
         $user->name = $request->get('name');
         $user->email = $request->get('email');
+        $user->role_id = $request->get('role_id');
         $user->save();
     
         // session()->flash('message', 'User data has been updated!');

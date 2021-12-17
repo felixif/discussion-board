@@ -5,23 +5,38 @@
 @endsection
 
 @section('content')
-    <div class="container rounded" style="border:1px solid black">
-        <p> <a href="{{ route('users.show', $comment->user_id) }}">
-                    {{$comment->user->name}}
-            </a> 
-        </p>
-        <p> {{$comment->text}} </p>
-        <a href="{{ route('comments.show', $comment) }}" class="btn btn-dark">View</a>
-        @if (Auth::user()->id === $comment->user_id)
-            <a href="{{ route('comments.edit', $comment) }}" class="btn btn-dark">Edit Comment</a>
-            <br />
-            <br />
-            
-            <form method ="POST" action="{{ route('comments.destroy', $comment) }}">
-                @csrf
-                @method('DELETE')
-                <button type=submit class="btn btn-dark">Delete Comment</button>
-            </form>  
-        @endif
-    </div>   
+<div class="row justify-content-left">
+    <div style="text-align:left">
+        <div class="card">
+            <div class="card-header">
+                <a href="{{ route('users.show', ['user' => $post->user ]) }}">{{$post->user->name}}</a>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title"><a href="{{ route('posts.show', ['post' => $post ]) }}"> {{$post->title}}</a></h5>
+                <p class="card-text">{{$post->text}}</p>
+                <div class="dropdown show">
+                    <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Options
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="{{ route('posts.show', $post) }}">View</a>
+                        @if(Auth::user()->id === $post->user->id || Auth::user()->role_id === "adm" 
+                            || Auth::user()->role_id === "mod" )
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ route('posts.edit', $post) }}">Edit</a>
+                            @if(Auth::user()->id === $post->user->id || Auth::user()->role_id === "adm")
+                                <form method ="POST" action="{{ route('posts.destroy', $post) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type=submit class="dropdown-item">Delete</button>
+                                </form> 
+                            @endif 
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+    </div>
+</div>
 @endsection

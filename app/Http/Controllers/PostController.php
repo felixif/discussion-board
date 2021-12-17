@@ -15,7 +15,7 @@ class PostController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except('index', 'show');
+        $this->middleware('auth');
     }
 
     /**
@@ -47,6 +47,12 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'title' => 'required|min:3|max:50',
+            'text' => 'required|min:3|max:1000',
+            'user_id' => 'required',
+        ]);
+
         $user = $request->user();
         $formData = $request->all();
         $post = $user->posts()->create($formData);
@@ -85,6 +91,12 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        $this->validate($request, [
+            'title' => 'required|min:3|max:50',
+            'text' => 'required|min:3|max:1000',
+            'user_id' => 'required',
+        ]);
+
         $post->title = $request->get('title');
         $post->text = $request->get('text');
         $post->save();

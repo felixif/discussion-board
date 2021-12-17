@@ -7,12 +7,15 @@
 @section('content')
     <div class="row justify-content-center">
         <div style="text-align:center">
-            <p>Welcome {{ Auth::user()->name }}</p>
+            <h2><b>Welcome {{ Auth::user()->name }}</b></h2>
 
             <a href="{{ route('posts.create') }}" class="btn btn-dark">Create new post</a>
             <a href="{{ route('users.edit', ['user' => Auth::user()]) }}" class="btn btn-dark">Edit profile</a>
             
-            <p>Your posts</p>
+            <br />
+            <br />
+            
+            <h3>Your posts</h3>
 
             <div class="row justify-content-left">
                 <div style="text-align:left">

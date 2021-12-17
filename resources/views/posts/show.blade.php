@@ -21,13 +21,15 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item" href="{{ route('posts.show', $post) }}">View</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ route('posts.edit', $post) }}">Edit</a>
-                        <form method ="POST" action="{{ route('posts.destroy', $post) }}">
-                            @csrf
-                            @method('DELETE')
-                            <button type=submit class="dropdown-item">Delete</button>
-                        </form>
+                        @if(Auth::user()->id === $post->user->id)
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ route('posts.edit', $post) }}">Edit</a>
+                            <form method ="POST" action="{{ route('posts.destroy', $post) }}">
+                                @csrf
+                                @method('DELETE')
+                                <button type=submit class="dropdown-item">Delete</button>
+                            </form>  
+                        @endif
                     </div>
                 </div>
             </div>
@@ -39,7 +41,7 @@
 <!--New post-->
 
 <br />
-    <a href="{{ route('comments.create',$post) }}" class="btn btn-dark">New Comment</a>
+    <!--<a href="{{ route('comments.create',$post) }}" class="btn btn-dark">New Comment</a>-->
     <div id="comment_box">
         <form method="POST" action="{{ route('comments.store', $post) }}">
             @csrf

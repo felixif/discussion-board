@@ -3,6 +3,7 @@
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ImageUploadController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,6 +44,8 @@ Route::get('/users/{user}/edit', [UserController::class, 'edit'])
 
 Route::put('/users/{user}', [UserController::class, 'update'])
     ->name('users.update');
+Route::delete('/users/{user}', [UserController::class, 'destroy'])
+    ->name('users.destroy');
 
 
 /**
@@ -101,3 +104,11 @@ require __DIR__.'/auth.php';
 
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+/**
+ * Routes for image uploading
+ */
+Route::get('image-upload', [ ImageUploadController::class, 'imageUpload' ])
+    ->name('image.upload');
+Route::post('image-upload', [ ImageUploadController::class, 'imageUploadPost' ])
+    ->name('image.upload.post');

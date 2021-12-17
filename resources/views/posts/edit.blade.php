@@ -5,8 +5,8 @@
 @endsection
 
 @section('content')
-    @if ($post->user->id === Auth::user()->id)
-    <h1>Edit your profile</h1>
+    @if ($post->user->id === Auth::user()->id || Auth::user()->role_id === "adm")
+    <h1>Edit your post</h1>
 
     <form method="POST" action="{{ route('posts.update', $post) }}">
         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
