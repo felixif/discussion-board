@@ -10,3 +10,4 @@
 ## Discussion board
 This is a simple web application that is meant to simulate a normal web discussion board. This project was done as part of my CSC348 Web App Development module at Swansea University. 
 
+Use the <b>origins</b> branch to test the application using Docker & WsL 2.0 environment
